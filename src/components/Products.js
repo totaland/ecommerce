@@ -2,7 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import Search from "@material-ui/icons/Search";
 import {Searchengin} from "styled-icons/fa-brands/Searchengin";
-import DynamicTable from "./DynamicTable";
+// import DynamicTable from "./DynamicTable";
+import ProductsItem from "./ProductsItem";
 
 const Div = styled.div`
   background-color: white;
@@ -46,18 +47,19 @@ const Input = styled.input`
   }
 `;
 
-function Ibm(props) {
+function Products(props) {
     return (
         <Div>
-            <DivSearch>
-                <Input type="text" placeholder={"Name Search"}/>
-                <SearchIcon>
-                    <Searchengin/>
-                </SearchIcon>
-            </DivSearch>
-            <DynamicTable/>
+            {/*<DivSearch>*/}
+            {/*    <Input type="text" placeholder={"Name Search"} />*/}
+            {/*    <SearchIcon>*/}
+            {/*        <Searchengin/>*/}
+            {/*    </SearchIcon>*/}
+            {/*</DivSearch>*/}
+            {/*<DynamicTable/>*/}
+            <ProductsItem />
         </Div>
     );
 }
 
-export default Ibm;
+export default Products;

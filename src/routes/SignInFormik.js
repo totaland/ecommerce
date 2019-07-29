@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import styled from "styled-components";
 import {ErrorMessage, Field, Form, Formik} from "formik";
 import {AppContext} from "../context/AppContext";
@@ -75,6 +75,41 @@ const Error = styled.div`
 
 export default function SignInFormik(props) {
     const [getUserInfo, signOut, candidateID, userHasAuthenticated, state, setState] = useContext(AppContext);
+
+    const initialState = {
+        authState: 'loading',
+        authData: null,
+        authError: null
+    }
+    const [authState, setAuthState] = useState(initialState);
+
+    Hub.listen('auth', (data) => {
+        switch (data.payload.event) {
+            case 'signIn':
+                setAuthState({authState: 'signedIn'});
+                setAuthState({authData: data.payload.data});
+                break;
+            case 'signIn_failure':
+                setAuthState({authState: 'signIn'});
+                setAuthState({authData: null});
+                setAuthState({authError: data.payload.data});
+                break;
+            default:
+                break;
+        }
+    });
+
+    useEffect(() => {
+        Auth.currentAuthenticatedUser().then(user => {
+            console.log(user);
+            setAuthState({authState: 'signedIn'});
+            userHasAuthenticated(true);
+        }).catch(e => {
+            console.log(e);
+            setAuthState({authState: 'signIn'});
+        });
+
+    },[]);
 
     return (
         <Div>

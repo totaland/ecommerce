@@ -2,7 +2,7 @@ import React from "react";
 import {Switch} from "react-router-dom";
 import SignInFormik from "./SignInFormik";
 import RegisterFormik from "./RegisterFormik";
-import IBM from "../components/IBM";
+import IBM from "../components/Products";
 
 import AuthenticatedRoute from "./AuthenticatedRoute";
 import UnauthenticatedRoute from "./UnauthenticatedRoute";

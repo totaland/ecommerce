@@ -21,6 +21,7 @@ function App() {
     };
     const [state, setState] = useState(initialState);
 
+
     useEffect( () => {
         const fetchData = async () => {
             await getUserInfo();
@@ -34,9 +35,11 @@ function App() {
                 }
             }
             setState({isAuthenticating: false});
+            // return state.isAuthenticated;
         };
         fetchData();
-    }, []);
+    },[]);
+
 
     // get current user information ####################################
     const getUserInfo = async () => {
@@ -70,18 +73,18 @@ function App() {
         });
     };
     return (
-        <AppContext.Provider value={[getUserInfo, signOut, candidateID, userHasAuthenticated, state, setState]}>
-        <BrowserRouter>
-            <div className="App site">
-                <ResponsiveAppBar />
-                <div className="site-content">
-                    <div className={"container"}>
-                        <Routes />
+            <BrowserRouter>
+                <AppContext.Provider value={[getUserInfo, signOut, candidateID, userHasAuthenticated, state, setState]}>
+                <div className="App site">
+                    <ResponsiveAppBar />
+                    <div className="site-content">
+                        <div className={"container"}>
+                            <Routes />
+                        </div>
                     </div>
                 </div>
-            </div>
-        </BrowserRouter>
-        </AppContext.Provider>
+                </AppContext.Provider>
+            </BrowserRouter>
     );
 }
 export default App;
