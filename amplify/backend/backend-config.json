@@ -1,0 +1,8 @@
+{
+	"auth": {
+		"b2cecommerce": {
+			"service": "Cognito",
+			"providerPlugin": "awscloudformation"
+		}
+	}
+}

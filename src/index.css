@@ -1,13 +1,111 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+@media screen {
+
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+  }
+
+  .topnav {
+    height: 30px;
+    line-height: 30px;
+  }
+  /*this site & site-content class can be body and main remember that footer need to be out of main and side-content to make it stick to bottom*/
+  .site {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  .site-content {
+    display: flex;
+    flex-grow: 1;
+    width: 100%;
+    height: 100%;
+    /*padding-top: 20px;*/
+    /*align-items: center;*/
+    justify-content: center;
+  }
+  .row {
+    margin-top: 1.5em;
+  }
+
+
+  nav ul a.btn, nav ul a.btn-floating {
+    margin-left: 0;
+  }
+
+  .backgroundColor {
+    background-color: #ee6e73
+  }
+
+  .waves-effect.waves-red .waves-ripple {
+    background-color: #ee6e73
+  }
+
+
+  li {
+    list-style: none;
+    text-decoration: none;
+
+  }
+  li a {
+    text-decoration: none;
+    color: white;
+  }
+
+  .container {
+    width: 100%;
+    /*padding-left: 15%;*/
+    /*padding-right: 15%;*/
+  }
+
+  .link li>a:hover{
+    background-color: rgba(0,0,0,0.05);
+  }
+
+  .link li>a {
+    color: rgba(0,0,0,0.87);
+    font-size: 14px;
+    display: block;
+    font-weight: 500;
+    height: 48px;
+    line-height: 48px;
+    padding: 0 16px;
+  }
+
+  .marginBottom {
+    margin-bottom: 10px;
+  }
+
+  #render-game {
+    line-height: 0;
+  }
+
+  /*body {*/
+  /*    position: fixed;*/
+  /*}*/
+
+  .testIframe{
+    position: relative;
+    z-index: 5;
+  }
+
+  button:focus {
+    outline: none;
+  }
+
+  .Demo__some-network__share-button:focus {
+    outline: none;
+  }
+
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
-}
