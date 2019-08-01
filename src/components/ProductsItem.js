@@ -165,7 +165,7 @@ const FieldStyled = styled(Field)`
 // main function
 function ProductsItem(props) {
 
-    const [getUserInfo, signOut, candidateID, userHasAuthenticated, state, setState, state2, dispatch] = useContext(AppContext);
+    const [signOut, state2, dispatch] = useContext(AppContext);
     const [search, setSearch] = useState("");
     const handleChange = event => {
         event.preventDefault();
@@ -176,11 +176,9 @@ function ProductsItem(props) {
         return product.name.toLowerCase().indexOf(search) !== -1;
     });
 
-    const addTo = async (e) => {
-        console.log(e);
-        await dispatch({type: "ADD", payload: products[e], children:Number(products[e].price.split("$")[1])});
+    const addTo =  (e) => {
+         dispatch({type: "ADD", payload: products[e], children:Number(products[e].price.split("$")[1])});
     };
-    console.log(state2);
 
     return (
         <>

@@ -22,7 +22,8 @@ const FormStyled = styled(Form)`
   width: 50%;
   align-items: center;
   max-height: 450px;
-  height: 60%;
+  height: 100%;
+  min-height: 60%;
   border: solid 1px rgb(0, 0, 0, 0.2);
   justify-content: space-between;
   border-radius: 3px;
@@ -90,7 +91,7 @@ const schema = yup.object({
 
 export default function RegisterForm(props) {
 
-    const [getUserInfo, signOut, candidateID, userHasAuthenticated, state, setState] = useContext(AppContext);
+    const [signOut, state2, dispatch] = useContext(AppContext);
 
     const [initialValue, setValues] = useState({newUser: null,});
     if(initialValue.newUser === null){
@@ -197,7 +198,8 @@ export default function RegisterForm(props) {
                             // alert(JSON.stringify(values, null, 2));
                             try {
                                 Auth.confirmSignUp(values.username, values.confirmation_code.toString()).then(() => {
-                                    userHasAuthenticated(true);
+                                    // userHasAuthenticated(true);
+                                    dispatch({type: "LOGIN"})
                                 });
                             } catch (e) {
                                 alert(e.message);

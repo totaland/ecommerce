@@ -78,7 +78,7 @@ const styles = makeStyles(theme => ({
 function ResponsiveDrawer() {
     const classes = styles();
     const [open, setOpen] = React.useState(false);
-    const [getUserInfo, signOut, candidateID, userHasAuthenticated, state, setState] = useContext(AppContext);
+    const [ignOut, state2, dispatch] = useContext(AppContext);
 
     function handleDrawerOpen() {
         setOpen(true);
@@ -88,16 +88,16 @@ function ResponsiveDrawer() {
         setOpen(false);
     }
 
-    const links = state.isAuthenticated ? (
-        <SignedInNav props={state} style={classes.li}/>
+    const links = state2.isAuthenticated2 ? (
+        <SignedInNav style={classes.li}/>
     ) : (
-        <SignedOutNav props={state}/>
+        <SignedOutNav/>
     );
 
-    const sideNavLinks = state.isAuthenticated ? (
-        <SignedInSideNav props={state}/>
+    const sideNavLinks = state2.isAuthenticated2 ? (
+        <SignedInSideNav />
     ) : (
-        <SignedOutSideNav props={state}/>
+        <SignedOutSideNav />
     );
 
     return (

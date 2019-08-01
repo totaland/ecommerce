@@ -37,7 +37,7 @@ const Icon = styled(ShoppingBasket)`
 
 
 function SignedInNav() {
-    const [getUserInfo, signOut, candidateID, userHasAuthenticated, state, setState] = useContext(AppContext);
+    const [signOut, state2, dispatch] = useContext(AppContext);
     const classes = style();
     return (
         <ul className={classes.ul}>

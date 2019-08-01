@@ -75,19 +75,34 @@ const Error = styled.div`
 
 export default function SignInFormik(props) {
 
-    const [getUserInfo, signOut, candidateID, userHasAuthenticated, state, setState] = useContext(AppContext);
-
-    useEffect(() => {
-        Auth.currentAuthenticatedUser().then(user => {
-            console.log(user);
-            userHasAuthenticated(true);
-        }).catch(e => {
-            console.log(e);
-        });
-        return () => {
-            userHasAuthenticated(true);
+    const [signOut, state2, dispatch] = useContext(AppContext);
+    //
+    // useEffect(() => {
+    //     Auth.currentAuthenticatedUser().then(user => {
+    //         console.log(user);
+    //         userHasAuthenticated(true);
+    //     }).catch(e => {
+    //         console.log(e);
+    //     });
+    //     return () => {
+    //         userHasAuthenticated(true);
+    //     }
+    // },[]);
+    useEffect( () => {
+        async function fetchData() {
+            try {
+                await Auth.currentAuthenticatedUser();
+                dispatch({type: "LOGIN"});
+            } catch (e) {
+                if (e !== "not authenticated") {
+                    alert(e);
+                }
+            }
         }
+
+        fetchData();
     },[]);
+
 
     return (
         <Div>
@@ -110,7 +125,8 @@ export default function SignInFormik(props) {
                             password: values.password
                         }).then(() => {
                             console.log("signed in");
-                            userHasAuthenticated(true);
+                            // userHasAuthenticated(true);
+                            dispatch({type: "LOGIN"});
                         }).catch(err => {
                             console.log(err);
                             alert(err.message);
