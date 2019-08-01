@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useReducer} from "react";
 import Amplify, {Auth, Storage} from "aws-amplify";
 import awsmobile from "./aws-exports";
 import ResponsiveAppBar from "./navbar/ResponsiveAppBar";
@@ -9,6 +9,22 @@ import {AppContext} from "./context/AppContext.js";
 Amplify.configure(awsmobile);
 Storage.configure({level: "private"});
 
+
+function reducer (state, action) {
+    switch (action.type) {
+        case 'ADD':
+            return {
+                orderDetails2: state.orderDetails2.concat(action.payload),
+                cart2: state.cart2 + 1,
+                total2: state.total2 + action.children,
+            };
+        case 'MINUS':
+            return {...state, cart2: state.cart2 -1, total2: state.total2 -1};
+        default:
+            return state;
+    }
+}
+
 function App() {
 
     const initialState = {
@@ -17,10 +33,20 @@ function App() {
         candidateId: "",
         userID: "",
         candidateArray: [],
-        candidateUrl: []
+        candidateUrl: [],
+        orderDetails: [],
+        cart: 0,
+        total: 0,
     };
     const [state, setState] = useState(initialState);
 
+    const secondInit = {
+        orderDetails2: [],
+        cart2: 0,
+        total2: 0,
+    }
+
+    const [state2, dispatch] = useReducer(reducer, secondInit);
 
     useEffect( () => {
         const fetchData = async () => {
@@ -34,8 +60,7 @@ function App() {
                     alert(e);
                 }
             }
-            setState({isAuthenticating: false});
-            // return state.isAuthenticated;
+            setState(state => ({...state, isAuthenticating: false}))
         };
         fetchData();
     },[]);
@@ -47,9 +72,10 @@ function App() {
             let id = "";
             await Auth.currentUserInfo().then(res => {
                 id = res.id;
-                setState({
+                setState(state => ({
+                    ...state,
                     userID: id
-                });
+                }));
             });
         } catch (e) {
             console.log(e);
@@ -57,24 +83,26 @@ function App() {
     };
 
     const userHasAuthenticated = authenticated => {
-        setState({isAuthenticated: authenticated});
+        setState(state => ({...state, isAuthenticated: authenticated}));
     };
 
     const signOut = async e => {
         await Auth.signOut();
         userHasAuthenticated(false);
-        setState({
-            profileUrl: ""
-        });
+        setState(state => ({
+            ...state,
+            // profileUrl: ""
+        }));
     };
     const candidateID = id => {
-        setState({
+        setState(state => ({
+            ...state,
             candidateId: id
-        });
+        }));
     };
     return (
             <BrowserRouter>
-                <AppContext.Provider value={[getUserInfo, signOut, candidateID, userHasAuthenticated, state, setState]}>
+                <AppContext.Provider value={[getUserInfo, signOut, candidateID, userHasAuthenticated, state, setState, state2, dispatch]}>
                 <div className="App site">
                     <ResponsiveAppBar />
                     <div className="site-content">

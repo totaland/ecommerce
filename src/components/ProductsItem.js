@@ -1,6 +1,6 @@
-import React, {useState} from "react";
+import React, {useContext, useState} from "react";
 import styled from "styled-components";
-
+import * as _ from 'lodash'
 import tallyUp from "../images/TallyUp.JPG";
 import gridLock from "../images/GridLock.JPG";
 import matchingFaces from "../images/MatchingFaces.JPG";
@@ -13,56 +13,19 @@ import Search from "@material-ui/core/SvgIcon/SvgIcon";
 import {Searchengin} from "styled-icons/fa-brands/Searchengin";
 import {Auth} from "aws-amplify";
 import {ErrorMessage, Field, Form, Formik} from "formik";
+import {AppContext} from "../context/AppContext";
 
 // other constance
 const products = [
     {name: "Tally Up", desc: "A nice thing", price: "$9.99", time: 1, id: 0},
     {name: "Grid Lock", desc: "Another thing", price: "$3.45", time: 1, id: 1},
-    {
-        name: "Matching Faces",
-        desc: "Something else",
-        price: "$6.51",
-        time: 1,
-        id: 2
-    },
-    {
-        name: "Numbblers",
-        desc: "Best thing of all",
-        price: "$14.11",
-        time: 1,
-        id: 3
-    },
-    {
-        name: "Resemble",
-        desc: "resemble something",
-        price: "$10.90",
-        time: 1,
-        id: 4
-    },
-    {
-        name: "Short Cuts",
-        desc: "short cuts something",
-        price: "$11.00",
-        time: 1,
-        id: 5
-    },
-    {
-        name: "Emotional Ties",
-        desc: "emotional ties something",
-        price: "$9.90",
-        time: 1,
-        id: 6
-    }
+    {name: "Matching Faces", desc: "Something else", price: "$6.51", time: 1, id: 2},
+    {name: "Numbblers", desc: "Best thing of all", price: "$14.11", time: 1, id: 3},
+    {name: "Resemble", desc: "resemble something", price: "$10.90", time: 1, id: 4},
+    {name: "Short Cuts", desc: "short cuts something", price: "$11.00", time: 1, id: 5},
+    {name: "Emotional Ties", desc: "emotional ties something", price: "$9.90", time: 1, id: 6}
 ];
-const imageName = [
-    "Tally Up",
-    "Grid Lock",
-    "Matching Faces",
-    "Numbblers",
-    "Resemble",
-    "Short Cuts",
-    "Emotional Ties"
-];
+const imageName = ["Tally Up", "Grid Lock", "Matching Faces", "Numbblers", "Resemble", "Short Cuts", "Emotional Ties"];
 
 const imageArray = [];
 
@@ -201,19 +164,23 @@ const FieldStyled = styled(Field)`
 
 // main function
 function ProductsItem(props) {
-    const initialState = {
-        search: ""
-    };
-    const [state, setState] = useState(initialState);
 
+    const [getUserInfo, signOut, candidateID, userHasAuthenticated, state, setState, state2, dispatch] = useContext(AppContext);
+    const [search, setSearch] = useState("");
     const handleChange = event => {
         event.preventDefault();
-        setState({search: event.target.value});
+        setSearch(event.target.value);
     };
 
     let filteredProducts = products.filter(product => {
-        return product.name.toLowerCase().indexOf(state.search) !== -1;
+        return product.name.toLowerCase().indexOf(search) !== -1;
     });
+
+    const addTo = async (e) => {
+        console.log(e);
+        await dispatch({type: "ADD", payload: products[e], children:Number(products[e].price.split("$")[1])});
+    };
+    console.log(state2);
 
     return (
         <>
@@ -222,6 +189,7 @@ function ProductsItem(props) {
                     type="text"
                     placeholder={"Name Search"}
                     onChange={handleChange}
+                    name={"search"}
                 />
                 <SearchIcon>
                     <Searchengin />
@@ -235,7 +203,7 @@ function ProductsItem(props) {
                             {imageName[value.id]}
                         </TopCard>
                         <BottomCard>
-                            <Button>Add to Cart</Button>
+                            <Button onClick={() => addTo(value.id)}>Add to Cart</Button>
                         </BottomCard>
                     </Div>
                 ))}
