@@ -3,12 +3,13 @@ import { Route, Redirect } from "react-router-dom";
 import { AppContext } from "../context/AppContext";
 
 const AuthenticatedRoute = ({ component: C, ...rest }) => {
-  const [signOut, state2, dispatch] = useContext(AppContext);
+  const [signOut, state2, dispatch, userHasAuthenticated, state ] = useContext(AppContext);
 
   return (
     <Route
       {...rest}
       render={props =>
+        // state.isAuthenticated ? (
         state2.isAuthenticated2 ? (
           <C {...props} />
         ) : (

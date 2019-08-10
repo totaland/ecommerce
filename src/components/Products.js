@@ -24,8 +24,8 @@ const SearchIcon = styled(Search)`
   width: 100%;
   font-size: 14px;
   &:hover {
+    cursor: pointer;
   }
-  cursor: pointer;
 `;
 
 const Input = styled.input`

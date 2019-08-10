@@ -161,7 +161,7 @@ const FieldStyled = styled(Field)`
     text-align: left;
   }
 `;
-
+const productList =[];
 // main function
 function ProductsItem(props) {
 
@@ -177,8 +177,16 @@ function ProductsItem(props) {
     });
 
     const addTo =  (e) => {
-         dispatch({type: "ADD", payload: products[e], children:Number(products[e].price.split("$")[1])});
+        console.log(e);
+        if(!state2.orderDetails.includes(products[e])){
+            dispatch({type: "ADD", payload: products[e], children:Number(products[e].price.split("$")[1])});
+        } else {
+            products[e].time = products[e].time +1
+            dispatch({type: "ADDTOTOTAL", children:Number(products[e].price.split("$")[1])})
+        }
+
     };
+    console.log(state2);
 
     return (
         <>

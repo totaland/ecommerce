@@ -1,0 +1,29 @@
+type Basket
+@model
+@auth(rules: [{allow: owner}])
+{
+  id: ID!
+  isDelivered: Boolean!
+  isPaid: Boolean!
+  items: [Item] @connection(name: "BasketOnItem")
+  stripeToken: String
+  user: User @connection(name: "BasketOnUser")
+}
+type Item
+  @model
+  @auth(rules: [{allow: owner}])
+{
+  basket: Basket @connection(name: "BasketOnItem")
+  id: ID!
+  name: String!
+  price: Int!
+}
+type User
+  @model
+  @auth(rules: [{allow: owner}])
+{
+  id: ID!
+  name: String!
+  email: String
+  baskets: [Basket] @connection(name: "BasketOnUser")
+}

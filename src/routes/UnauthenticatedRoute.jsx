@@ -16,13 +16,14 @@ function querystring(name, url = window.location.href) {
 }
 
 const UnauthenticatedRoute = ({ component: C, ...rest }) => {
-  const [signOut, state2, dispatch] = useContext(AppContext);
+  const [signOut, state2, dispatch, userHasAuthenticated, state] = useContext(AppContext);
 
   const redirect = querystring("redirect");
   return (
     <Route
       {...rest}
       render={props =>
+        // !state.isAuthenticated ? (
         !state2.isAuthenticated2 ? (
           <C {...props} />
         ) : (

@@ -1,11 +1,12 @@
 import React, {useContext, useEffect} from "react";
 import {NavLink} from "react-router-dom";
 import {makeStyles} from "@material-ui/core/styles";
+import styled from "styled-components";
 
 import {AppContext} from "../context/AppContext";
 import Avatar from "../components/Avatar"
 import {ShoppingBasket} from "styled-icons/material/ShoppingBasket"
-import styled from "styled-components";
+import ICON from "../components/Icon"
 
 const style = makeStyles(theme => ({
     li: {
@@ -20,20 +21,6 @@ const style = makeStyles(theme => ({
     }
 }));
 
-const Icon = styled(ShoppingBasket)`
-  width: 30px;
-  &:after {
-    content: "🦄";
-    font-size:12px;
-    background: red;
-    border-radius:50%;
-    padding:3px;
-    position:relative;
-    left:-8px;
-    top:-10px;
-    opacity:0.8;
-  }
-`;
 
 
 function SignedInNav() {
@@ -48,7 +35,7 @@ function SignedInNav() {
                 <NavLink to={"/profile"}><Avatar src={'/images/lady.jfif'} size={"40px"}/></NavLink>
             </li>
             <li className={classes.li}>
-                <NavLink to={"/shoppingbasket"}><Icon value={5} /></NavLink>
+                <NavLink to={"/shoppingbasket"}><ICON>{state2.cart}</ICON></NavLink>
             </li>
 
             <li className={classes.li}>

@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from "react";
 import styled from "styled-components";
 import {ErrorMessage, Field, Form, Formik} from "formik";
 import {AppContext} from "../context/AppContext";
@@ -24,7 +24,7 @@ const FormStyled = styled(Form)`
   max-height: 450px;
   min-height: 350px;
   height: 50%;
-  border: solid 1px rgb(0,0,0,0.2);
+  border: solid 1px rgb(0, 0, 0, 0.2);
   justify-content: space-between;
   border-radius: 3px;
   -webkit-box-shadow: 0px 2px 5px 0px rgba(153, 153, 153, 1);
@@ -40,7 +40,7 @@ const FieldStyled = styled(Field)`
   border-left: none;
   border-right: none;
   background-color: #fff;
-  margin-top:16px;
+  margin-top: 16px;
   margin-bottom: 8px;
   border-radius: 3px;
   font-size: 1rem;
@@ -57,7 +57,6 @@ const Button = styled.button`
   color: white;
   margin-bottom: 2em;
   font-size: 1rem;
-  
 `;
 const DivH1 = styled.div`
   background-color: #4dd0e1;
@@ -74,25 +73,19 @@ const Error = styled.div`
 `;
 
 export default function SignInFormik(props) {
-
-    const [signOut, state2, dispatch] = useContext(AppContext);
-    //
-    // useEffect(() => {
-    //     Auth.currentAuthenticatedUser().then(user => {
-    //         console.log(user);
-    //         userHasAuthenticated(true);
-    //     }).catch(e => {
-    //         console.log(e);
-    //     });
-    //     return () => {
-    //         userHasAuthenticated(true);
-    //     }
-    // },[]);
-    useEffect( () => {
+    const [signOut, state2, dispatch, userHasAuthenticated] = useContext(AppContext);
+    useEffect(() => {
         async function fetchData() {
             try {
-                await Auth.currentAuthenticatedUser();
-                dispatch({type: "LOGIN"});
+                await Auth.currentAuthenticatedUser()
+                    .then(user => {
+                        console.log(user);
+                        // userHasAuthenticated(true);
+                        dispatch({type:"LOGIN"})
+                    })
+                    .catch(e => {
+                        console.log(e);
+                    });
             } catch (e) {
                 if (e !== "not authenticated") {
                     alert(e);
@@ -101,13 +94,16 @@ export default function SignInFormik(props) {
         }
 
         fetchData();
-    },[]);
-
+        return () => {
+            // userHasAuthenticated(true);
+            dispatch({type: "LOGIN"});
+        };
+    }, []);
 
     return (
         <Div>
             <Formik
-                initialValues={{username: '', password: ''}}
+                initialValues={{username: "", password: ""}}
                 validate={values => {
                     let errors = {};
                     if (!values.username) {
@@ -123,24 +119,32 @@ export default function SignInFormik(props) {
                         Auth.signIn({
                             username: values.username,
                             password: values.password
-                        }).then(() => {
-                            console.log("signed in");
-                            // userHasAuthenticated(true);
-                            dispatch({type: "LOGIN"});
-                        }).catch(err => {
-                            console.log(err);
-                            alert(err.message);
-                        });
+                        })
+                            .then(() => {
+                                console.log("signed in");
+                                // userHasAuthenticated(true);
+                                dispatch({type: "LOGIN"});
+                            })
+                            .catch(err => {
+                                console.log(err);
+                                alert(err.message);
+                            });
                         setSubmitting(false);
                     }, 400);
                 }}
             >
                 {({isSubmitting}) => (
                     <FormStyled>
-                        <DivH1><h1>Login</h1></DivH1>
+                        <DivH1>
+                            <h1>Login</h1>
+                        </DivH1>
                         <FieldStyled type="text" name="username" placeholder={"Username"}/>
                         <ErrorMessage name="username" component={Error}/>
-                        <FieldStyled type="password" name="password" placeholder={"Password"}/>
+                        <FieldStyled
+                            type="password"
+                            name="password"
+                            placeholder={"Password"}
+                        />
                         <ErrorMessage name="password" component={Error}/>
                         <Button type="submit" disable={isSubmitting}>
                             Continue
@@ -149,6 +153,5 @@ export default function SignInFormik(props) {
                 )}
             </Formik>
         </Div>
-    )
+    );
 }
-
