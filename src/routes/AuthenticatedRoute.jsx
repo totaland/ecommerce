@@ -3,7 +3,7 @@ import { Route, Redirect } from "react-router-dom";
 import { AppContext } from "../context/AppContext";
 
 const AuthenticatedRoute = ({ component: C, ...rest }) => {
-  const [signOut, state2, dispatch, userHasAuthenticated, state ] = useContext(AppContext);
+  const [signOut, state2, dispatch, createUser ] = useContext(AppContext);
 
   return (
     <Route

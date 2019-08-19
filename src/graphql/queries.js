@@ -4,13 +4,13 @@
 export const getBasket = `query GetBasket($id: ID!) {
   getBasket(id: $id) {
     id
-    isDelivered
     isPaid
     items {
       items {
         id
         name
         price
+        time
       }
       nextToken
     }
@@ -34,7 +34,6 @@ export const listBaskets = `query ListBaskets(
   listBaskets(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
       id
-      isDelivered
       isPaid
       items {
         nextToken
@@ -54,7 +53,6 @@ export const getItem = `query GetItem($id: ID!) {
   getItem(id: $id) {
     basket {
       id
-      isDelivered
       isPaid
       items {
         nextToken
@@ -69,6 +67,7 @@ export const getItem = `query GetItem($id: ID!) {
     id
     name
     price
+    time
   }
 }
 `;
@@ -81,13 +80,13 @@ export const listItems = `query ListItems(
     items {
       basket {
         id
-        isDelivered
         isPaid
         stripeToken
       }
       id
       name
       price
+      time
     }
     nextToken
   }
@@ -101,7 +100,6 @@ export const getUser = `query GetUser($id: ID!) {
     baskets {
       items {
         id
-        isDelivered
         isPaid
         stripeToken
       }

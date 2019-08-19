@@ -4,13 +4,13 @@
 export const onCreateBasket = `subscription OnCreateBasket {
   onCreateBasket {
     id
-    isDelivered
     isPaid
     items {
       items {
         id
         name
         price
+        time
       }
       nextToken
     }
@@ -29,13 +29,13 @@ export const onCreateBasket = `subscription OnCreateBasket {
 export const onUpdateBasket = `subscription OnUpdateBasket {
   onUpdateBasket {
     id
-    isDelivered
     isPaid
     items {
       items {
         id
         name
         price
+        time
       }
       nextToken
     }
@@ -54,13 +54,13 @@ export const onUpdateBasket = `subscription OnUpdateBasket {
 export const onDeleteBasket = `subscription OnDeleteBasket {
   onDeleteBasket {
     id
-    isDelivered
     isPaid
     items {
       items {
         id
         name
         price
+        time
       }
       nextToken
     }
@@ -80,7 +80,6 @@ export const onCreateItem = `subscription OnCreateItem {
   onCreateItem {
     basket {
       id
-      isDelivered
       isPaid
       items {
         nextToken
@@ -95,6 +94,7 @@ export const onCreateItem = `subscription OnCreateItem {
     id
     name
     price
+    time
   }
 }
 `;
@@ -102,7 +102,6 @@ export const onUpdateItem = `subscription OnUpdateItem {
   onUpdateItem {
     basket {
       id
-      isDelivered
       isPaid
       items {
         nextToken
@@ -117,6 +116,7 @@ export const onUpdateItem = `subscription OnUpdateItem {
     id
     name
     price
+    time
   }
 }
 `;
@@ -124,7 +124,6 @@ export const onDeleteItem = `subscription OnDeleteItem {
   onDeleteItem {
     basket {
       id
-      isDelivered
       isPaid
       items {
         nextToken
@@ -139,6 +138,7 @@ export const onDeleteItem = `subscription OnDeleteItem {
     id
     name
     price
+    time
   }
 }
 `;
@@ -150,7 +150,6 @@ export const onCreateUser = `subscription OnCreateUser {
     baskets {
       items {
         id
-        isDelivered
         isPaid
         stripeToken
       }
@@ -167,7 +166,6 @@ export const onUpdateUser = `subscription OnUpdateUser {
     baskets {
       items {
         id
-        isDelivered
         isPaid
         stripeToken
       }
@@ -184,7 +182,6 @@ export const onDeleteUser = `subscription OnDeleteUser {
     baskets {
       items {
         id
-        isDelivered
         isPaid
         stripeToken
       }

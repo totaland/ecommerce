@@ -10,6 +10,7 @@ const Div = styled.div`
   display: flex;
   justify-content: center;
   height: 100%;
+  width: 100%;
   vertical-align: middle;
   align-items: center;
 `;
@@ -91,7 +92,7 @@ const schema = yup.object({
 
 export default function RegisterForm(props) {
 
-    const [signOut, state2, dispatch] = useContext(AppContext);
+    const [signOut, state2, dispatch, createUser] = useContext(AppContext);
 
     const [initialValue, setValues] = useState({newUser: null,});
     if(initialValue.newUser === null){

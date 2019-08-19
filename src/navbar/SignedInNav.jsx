@@ -24,7 +24,7 @@ const style = makeStyles(theme => ({
 
 
 function SignedInNav() {
-    const [signOut, state2, dispatch] = useContext(AppContext);
+    const [signOut, state2, dispatch, createUser] = useContext(AppContext);
     const classes = style();
     return (
         <ul className={classes.ul}>

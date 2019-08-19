@@ -36,7 +36,7 @@ const style = makeStyles(theme => ({
 
 function SignedInSideNav () {
 
-    const [signOut, state2, dispatch] = useContext(AppContext);
+    const [signOut, state2, dispatch,createUser] = useContext(AppContext);
     const InitialSignInState = {
         userName: "",
         email: ""

@@ -165,7 +165,8 @@ const productList =[];
 // main function
 function ProductsItem(props) {
 
-    const [signOut, state2, dispatch] = useContext(AppContext);
+    const [signOut, state2, dispatch, createUser] = useContext(AppContext);
+
     const [search, setSearch] = useState("");
     const handleChange = event => {
         event.preventDefault();
@@ -177,16 +178,16 @@ function ProductsItem(props) {
     });
 
     const addTo =  (e) => {
-        console.log(e);
+        // console.log(e);
         if(!state2.orderDetails.includes(products[e])){
             dispatch({type: "ADD", payload: products[e], children:Number(products[e].price.split("$")[1])});
         } else {
-            products[e].time = products[e].time +1
+            products[e].time = products[e].time +1;
             dispatch({type: "ADDTOTOTAL", children:Number(products[e].price.split("$")[1])})
         }
 
     };
-    console.log(state2);
+    // console.log(state2);
 
     return (
         <>

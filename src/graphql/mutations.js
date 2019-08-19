@@ -4,13 +4,13 @@
 export const createBasket = `mutation CreateBasket($input: CreateBasketInput!) {
   createBasket(input: $input) {
     id
-    isDelivered
     isPaid
     items {
       items {
         id
         name
         price
+        time
       }
       nextToken
     }
@@ -29,13 +29,13 @@ export const createBasket = `mutation CreateBasket($input: CreateBasketInput!) {
 export const updateBasket = `mutation UpdateBasket($input: UpdateBasketInput!) {
   updateBasket(input: $input) {
     id
-    isDelivered
     isPaid
     items {
       items {
         id
         name
         price
+        time
       }
       nextToken
     }
@@ -54,13 +54,13 @@ export const updateBasket = `mutation UpdateBasket($input: UpdateBasketInput!) {
 export const deleteBasket = `mutation DeleteBasket($input: DeleteBasketInput!) {
   deleteBasket(input: $input) {
     id
-    isDelivered
     isPaid
     items {
       items {
         id
         name
         price
+        time
       }
       nextToken
     }
@@ -80,7 +80,6 @@ export const createItem = `mutation CreateItem($input: CreateItemInput!) {
   createItem(input: $input) {
     basket {
       id
-      isDelivered
       isPaid
       items {
         nextToken
@@ -95,6 +94,7 @@ export const createItem = `mutation CreateItem($input: CreateItemInput!) {
     id
     name
     price
+    time
   }
 }
 `;
@@ -102,7 +102,6 @@ export const updateItem = `mutation UpdateItem($input: UpdateItemInput!) {
   updateItem(input: $input) {
     basket {
       id
-      isDelivered
       isPaid
       items {
         nextToken
@@ -117,6 +116,7 @@ export const updateItem = `mutation UpdateItem($input: UpdateItemInput!) {
     id
     name
     price
+    time
   }
 }
 `;
@@ -124,7 +124,6 @@ export const deleteItem = `mutation DeleteItem($input: DeleteItemInput!) {
   deleteItem(input: $input) {
     basket {
       id
-      isDelivered
       isPaid
       items {
         nextToken
@@ -139,6 +138,7 @@ export const deleteItem = `mutation DeleteItem($input: DeleteItemInput!) {
     id
     name
     price
+    time
   }
 }
 `;
@@ -150,7 +150,6 @@ export const createUser = `mutation CreateUser($input: CreateUserInput!) {
     baskets {
       items {
         id
-        isDelivered
         isPaid
         stripeToken
       }
@@ -167,7 +166,6 @@ export const updateUser = `mutation UpdateUser($input: UpdateUserInput!) {
     baskets {
       items {
         id
-        isDelivered
         isPaid
         stripeToken
       }
@@ -184,7 +182,6 @@ export const deleteUser = `mutation DeleteUser($input: DeleteUserInput!) {
     baskets {
       items {
         id
-        isDelivered
         isPaid
         stripeToken
       }

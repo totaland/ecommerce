@@ -3,7 +3,6 @@ type Basket
 @auth(rules: [{allow: owner}])
 {
   id: ID!
-  isDelivered: Boolean!
   isPaid: Boolean!
   items: [Item] @connection(name: "BasketOnItem")
   stripeToken: String
@@ -16,7 +15,8 @@ type Item
   basket: Basket @connection(name: "BasketOnItem")
   id: ID!
   name: String!
-  price: Int!
+  price: Float!
+  time: Int!
 }
 type User
   @model

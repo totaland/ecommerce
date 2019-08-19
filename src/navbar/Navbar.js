@@ -36,7 +36,7 @@ const ActiveLi = styled(Li)`
 
 export default function LogInNav(props) {
 
-    const [signOut, state2, dispatch, userHasAuthenticated, state] = useContext(AppContext);
+    const [signOut, state2, dispatch, createUser] = useContext(AppContext);
 
     // const links = state.isAuthenticated ? (
         const links = state2.isAuthenticated2 ? (
@@ -45,7 +45,7 @@ export default function LogInNav(props) {
         <SignedOutNav />
     );
 
-    const sideNavLinks = state.isAuthenticated ? (
+    const sideNavLinks = state2.isAuthenticated2 ? (
         <SignedInSideNav />
     ) : (
         <SignedOutSideNav />
@@ -54,7 +54,7 @@ export default function LogInNav(props) {
     return (
         <div>
             <Ul>
-                <ActiveLi>Uactually</ActiveLi>
+                <ActiveLi>UnderstandU</ActiveLi>
                 {links}
             </Ul>
 

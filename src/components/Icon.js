@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect} from 'react';
 import styled from 'styled-components'
 import {ShoppingBasket} from "styled-icons/material/ShoppingBasket"
 import {AppContext} from "../context/AppContext";
@@ -66,12 +66,22 @@ const Li = styled.li`
 
 function Icon(props) {
 
-    const [signOut, state2, dispatch] = useContext(AppContext);
+    const [signOut, state2, dispatch, createUser] = useContext(AppContext);
+
+    // this might come in handy later on
+    // useEffect(()=> {
+    //     async function checkCart() {
+    //         if(state2.orderDetails.length>0) {
+    //             dispatch({type: "COMPLETE"});
+    //         }
+    //     }
+    //     checkCart();
+    // }, []);
 
     const total = new Intl.NumberFormat('en-AU', {style: 'currency', currency:'AUD'}).format(state2.total)
     const products = state2.orderDetails;
-    console.log(products.name)
-    console.log(products);
+    // console.log(products.name);
+    // console.log(products);
     return (
         <Container>
         <ICON/>
