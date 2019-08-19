@@ -1,35 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f5b2bf2c-e73a-464b-bc4a-166a929ef409" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/amplify/backend/hosting/S3AndCloudFront/parameters.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/amplify/backend/hosting/S3AndCloudFront/template.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/amplify/backend/api/ecommerce/schema.graphql" beforeDir="false" afterPath="$PROJECT_DIR$/amplify/backend/api/ecommerce/schema.graphql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/amplify/backend/backend-config.json" beforeDir="false" afterPath="$PROJECT_DIR$/amplify/backend/backend-config.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Charge.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Charge.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Icon.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Icon.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Payment.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Payment.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ProductsItem.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ProductsItem.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/graphql/mutations.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/graphql/mutations.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/graphql/queries.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/graphql/queries.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/graphql/schema.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/graphql/schema.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/graphql/subscriptions.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/graphql/subscriptions.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/navbar/Navbar.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/navbar/Navbar.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/navbar/ResponsiveAppBar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/navbar/ResponsiveAppBar.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/navbar/SignedInNav.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/navbar/SignedInNav.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/navbar/SignedInSideNav.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/navbar/SignedInSideNav.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/AuthenticatedRoute.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/AuthenticatedRoute.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/RegisterFormik.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/RegisterFormik.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/Routes.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/Routes.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/SignInFormik.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/SignInFormik.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/UnauthenticatedRoute.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/UnauthenticatedRoute.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
-    </list>
+    <list default="true" id="f5b2bf2c-e73a-464b-bc4a-166a929ef409" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -76,12 +48,12 @@
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\jnguyen\Documents\GIT\ecommerce\src" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\jnguyen\Documents\GIT\ecommerce\src\backend\node_modules" />
       <recent name="C:\Users\jnguyen\Documents\GIT\ecommerce\src\backend" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\jnguyen\Documents\GIT\ecommerce\src" />
     </key>
   </component>
   <component name="RunDashboard">
