@@ -1,13 +1,13 @@
 import React, {useState, useEffect} from "react";
 import Amplify, {Auth, Storage} from "aws-amplify";
-import awsmobile from "./aws-exports";
+// import awsmobile from "./aws-exports";
 import ResponsiveAppBar from "./navbar/ResponsiveAppBar";
 import {BrowserRouter} from "react-router-dom";
 import Routes from "./routes/Routes";
 import {AppContext} from "./context/AppContext.js";
 
-Amplify.configure(awsmobile);
-Storage.configure({level: "private"});
+// Amplify.configure(awsmobile);
+// Storage.configure({level: "private"});
 
 function App() {
 
