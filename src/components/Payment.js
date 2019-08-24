@@ -78,10 +78,16 @@ function Payment({stripe: {createToken, customers}}) {
         ev.preventDefault();
         let {token} = await createToken({name: "Name"});
 
-        let response = await fetch("http://ecommerce-hosting-bucket-ecoenviron.s3-website-ap-southeast-2.amazonaws.com/charge", {
+        let response = await fetch("https://wm9vjg32g3.execute-api.ap-southeast-2.amazonaws.com/dev/charge", {
             method: "POST",
-            headers: {"Content-Type": "text/plain"},
-            body: token.id
+
+            body: JSON.stringify({
+                token: token.id,
+                charge: {
+                    amount: 100,
+                    currency: "AUD"
+                }
+            }),
         });
 
         if(response.ok){

@@ -146,7 +146,6 @@ function App() {
             } else {
                 id3 = id2;
             }
-            // if user has more than or equal to 1 image then set image id to number of image
             await dispatch({
                 type: "SETBASKET",
                 basketId: id3
