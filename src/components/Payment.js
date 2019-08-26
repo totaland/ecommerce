@@ -74,32 +74,55 @@ function Payment({stripe: {createToken, customers}}) {
         setBasketID();
     },[state2.basketId]);
 
+    console.log(state2.orderDetails);
+    let des = "For the purchases of: ";
+    for (let i = 0; i < state2.orderDetails.length; i++) {
+        if(i === state2.orderDetails.length-1) {
+            des = des + "and " + state2.orderDetails[i].time + "x" + state2.orderDetails[i].name + ".";
+        } else {
+            des = des + state2.orderDetails[i].time + "x" + state2.orderDetails[i].name + ", ";
+        }
+    }
+    console.log(state2);
+
+    // creating user, basket, item in DynamoDB, sending token, amount to backend
     const submit = async ev => {
         ev.preventDefault();
-        let {token} = await createToken({name: "Name"});
+        // get description of purchases
 
+        // creating the token
+        let {token} = await createToken({name: "Name"});
+        // sending the data to backend
         let response = await fetch("https://wm9vjg32g3.execute-api.ap-southeast-2.amazonaws.com/dev/charge", {
             method: "POST",
-
             body: JSON.stringify({
                 token: token.id,
                 charge: {
-                    amount: 100,
-                    currency: "AUD"
-                }
+                    amount: Number(state2.total*100).toFixed(0),
+                    currency: "aud",
+                    description: des
+                },
+                customer: {
+                    name: state2.username,
+                    email: state2.email,
+                    phone: state2.phone
+                },
             }),
         });
 
         if(response.ok){
-            dispatch({type: "COMPLETE"});
+            dispatch({type: "COMPLETE"}); // what to do after setting it to complete?
             console.log("Purchase Complete");
+        //  after complete the pay then users will receive the report
+        //  will call the method that send the report to user email address here.
         }
-
+        // create users
         try {
             await createUser();
         } catch (e) {
             console.log(e);
         }
+
         try{
             await dispatch({type: "SETTOKEN", tokenId: token.id});
             await createBasket(token.id);

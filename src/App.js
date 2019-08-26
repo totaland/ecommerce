@@ -49,7 +49,8 @@ function reducer(state, action) {
                 ...state,
                 username: action.username,
                 userId: action.userId,
-                email: action.email
+                email: action.email,
+                phone: action.phone
             };
         case "SETTOKEN":
             return {
@@ -83,8 +84,10 @@ function App() {
         username: "",
         userId: "",
         email: "",
+        phone: "",
         tokenId: "",
-        basketId: ""
+        basketId: "",
+        description: ""
     };
 
     const [state2, dispatch] = useReducer(reducer, secondInit);
@@ -101,9 +104,9 @@ function App() {
                             type: "SETUSER",
                             username: user.username,
                             userId: user.pool.clientId,
-                            email: user.attributes.email
+                            email: user.attributes.email,
+                            phone: user.attributes.phone_number
                         });
-
                         dispatch({type: "LOGIN"});
                     })
                     .catch(e => {
@@ -135,7 +138,6 @@ function App() {
     // create basket
     let basketDetails;
     const createBasket = async token => {
-
         await API.graphql(graphqlOperation(queries.getUser, {id: state2.userId})).then(async res => {
             console.log(res);
             let id = String(res.data.getUser.baskets.items.length) + "-" + state2.userId;
@@ -166,9 +168,8 @@ function App() {
             }
             createItem(id3);
         });
-
     };
-
+    // create items
     const createItem = async (id3) => {
         console.log(state2.orderDetails);
         let products = state2.orderDetails;
@@ -192,8 +193,6 @@ function App() {
     // sign user out of the application
     const signOut = async e => {
         await Auth.signOut();
-        // when should I uncomplete the purchase?
-        // dispatch({type: "UNCOMPLETE"});
         dispatch({type: "LOGOUT"});
     };
 
