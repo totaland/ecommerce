@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect, useState} from "react";
 import styled from "styled-components";
 import {ErrorMessage, Field, Form, Formik} from "formik";
 import {AppContext} from "../context/AppContext";
@@ -14,7 +14,7 @@ const Div = styled.div`
   align-items: center;
 `;
 
-const FormStyled = styled(Form)`
+export const FormStyled = styled(Form)`
   display: flex;
   flex-direction: column;
   max-width: 350px;
@@ -24,7 +24,7 @@ const FormStyled = styled(Form)`
   max-height: 450px;
   min-height: 350px;
   height: 50%;
-  border: solid 1px rgb(0,0,0,0.2);
+  border: solid 1px rgb(0, 0, 0, 0.2);
   justify-content: space-between;
   border-radius: 3px;
   -webkit-box-shadow: 0px 2px 5px 0px rgba(153, 153, 153, 1);
@@ -32,7 +32,7 @@ const FormStyled = styled(Form)`
   box-shadow: 0px 2px 5px 0px rgba(153, 153, 153, 1);
 `;
 
-const FieldStyled = styled(Field)`
+export const FieldStyled = styled(Field)`
   width: 80%;
   height: 2em;
   border-bottom: 1px solid #ccc;
@@ -40,7 +40,7 @@ const FieldStyled = styled(Field)`
   border-left: none;
   border-right: none;
   background-color: #fff;
-  margin-top:16px;
+  margin-top: 16px;
   margin-bottom: 8px;
   border-radius: 3px;
   font-size: 1rem;
@@ -57,7 +57,6 @@ const Button = styled.button`
   color: white;
   margin-bottom: 2em;
   font-size: 1rem;
-  
 `;
 const DivH1 = styled.div`
   background-color: #4dd0e1;
@@ -69,17 +68,17 @@ const DivH1 = styled.div`
   color: white;
 `;
 
-const Error = styled.div`
+export const Error = styled.div`
   color: #ee6e73;
 `;
 
 export default function SignInFormik(props) {
-    const [getUserInfo, signOut, candidateID, userHasAuthenticated, state, setState] = useContext(AppContext);
+    const [signOut, state2, dispatch, createUser] = useContext(AppContext);
 
     return (
         <Div>
             <Formik
-                initialValues={{username: '', password: ''}}
+                initialValues={{username: "", password: ""}}
                 validate={values => {
                     let errors = {};
                     if (!values.username) {
@@ -95,31 +94,40 @@ export default function SignInFormik(props) {
                         Auth.signIn({
                             username: values.username,
                             password: values.password
-                        }).then(() => {
-                            console.log("signed in");
-                            userHasAuthenticated(true);
-                        }).catch(err => {
-                            console.log(err);
-                            alert(err.message);
-                        });
+                        })
+                            .then(() => {
+                                console.log("signed in");
+                                // userHasAuthenticated(true);
+                                dispatch({type: "LOGIN"});
+                            })
+                            .catch(err => {
+                                console.log(err);
+                                alert(err.message);
+                            });
                         setSubmitting(false);
                     }, 400);
                 }}
+
             >
                 {({isSubmitting}) => (
                     <FormStyled>
-                        <DivH1><h1>Login</h1></DivH1>
+                        <DivH1>
+                            <h1>Login</h1>
+                        </DivH1>
                         <FieldStyled type="text" name="username" placeholder={"Username"}/>
                         <ErrorMessage name="username" component={Error}/>
-                        <FieldStyled type="password" name="password" placeholder={"Password"}/>
+                        <FieldStyled
+                            type="password"
+                            name="password"
+                            placeholder={"Password"}
+                        />
                         <ErrorMessage name="password" component={Error}/>
                         <Button type="submit" disable={isSubmitting}>
-                            Continue
+                            NEXT
                         </Button>
                     </FormStyled>
                 )}
             </Formik>
         </Div>
-    )
+    );
 }
-

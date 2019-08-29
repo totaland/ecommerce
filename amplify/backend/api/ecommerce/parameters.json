@@ -1,0 +1,10 @@
+{
+    "AppSyncApiName": "ecommerce",
+    "DynamoDBBillingMode": "PAY_PER_REQUEST",
+    "AuthCognitoUserPoolId": {
+        "Fn::GetAtt": [
+            "authb2cecommerce",
+            "Outputs.UserPoolId"
+        ]
+    }
+}

@@ -1,8 +1,12 @@
 import React, {useContext, useEffect} from "react";
 import {NavLink} from "react-router-dom";
-
 import {makeStyles} from "@material-ui/core/styles";
+import styled from "styled-components";
+
 import {AppContext} from "../context/AppContext";
+import Avatar from "../components/Avatar"
+import {ShoppingBasket} from "styled-icons/material/ShoppingBasket"
+import ICON from "../components/Icon"
 
 const style = makeStyles(theme => ({
     li: {
@@ -17,17 +21,23 @@ const style = makeStyles(theme => ({
     }
 }));
 
+
+
 function SignedInNav() {
-    const [getUserInfo, signOut, candidateID, userHasAuthenticated, state, setState] = useContext(AppContext);
+    const [signOut, state2, dispatch, createUser] = useContext(AppContext);
     const classes = style();
     return (
         <ul className={classes.ul}>
             <li className={classes.li}>
-                <NavLink to={"/"}>Home</NavLink>
+                <NavLink to={"/"}>Products</NavLink>
             </li>
             <li className={classes.li}>
-                <NavLink to={"/support"}>Support</NavLink>
+                <NavLink to={"/profile"}><Avatar src={'/images/lady.jfif'} size={"40px"}/></NavLink>
             </li>
+            <li className={classes.li}>
+                <NavLink to={"/shoppingbasket"}><ICON>{state2.cart}</ICON></NavLink>
+            </li>
+
             <li className={classes.li}>
                 <NavLink to={"#"} onClick={signOut}>
                     Log Out
