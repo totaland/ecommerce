@@ -14,7 +14,7 @@ const Div = styled.div`
   align-items: center;
 `;
 
-const FormStyled = styled(Form)`
+export const FormStyled = styled(Form)`
   display: flex;
   flex-direction: column;
   max-width: 350px;
@@ -32,7 +32,7 @@ const FormStyled = styled(Form)`
   box-shadow: 0px 2px 5px 0px rgba(153, 153, 153, 1);
 `;
 
-const FieldStyled = styled(Field)`
+export const FieldStyled = styled(Field)`
   width: 80%;
   height: 2em;
   border-bottom: 1px solid #ccc;
@@ -68,7 +68,7 @@ const DivH1 = styled.div`
   color: white;
 `;
 
-const Error = styled.div`
+export const Error = styled.div`
   color: #ee6e73;
 `;
 
@@ -107,6 +107,7 @@ export default function SignInFormik(props) {
                         setSubmitting(false);
                     }, 400);
                 }}
+
             >
                 {({isSubmitting}) => (
                     <FormStyled>
@@ -122,7 +123,7 @@ export default function SignInFormik(props) {
                         />
                         <ErrorMessage name="password" component={Error}/>
                         <Button type="submit" disable={isSubmitting}>
-                            Continue
+                            NEXT
                         </Button>
                     </FormStyled>
                 )}

@@ -161,33 +161,30 @@ const FieldStyled = styled(Field)`
     text-align: left;
   }
 `;
-const productList =[];
-// main function
-function ProductsItem(props) {
 
+function ProductsItem(props) {
     const [signOut, state2, dispatch, createUser] = useContext(AppContext);
 
     const [search, setSearch] = useState("");
+
+    // setting the search value
     const handleChange = event => {
         event.preventDefault();
         setSearch(event.target.value);
     };
-
+    // using the value of the search to display products
     let filteredProducts = products.filter(product => {
         return product.name.toLowerCase().indexOf(search) !== -1;
     });
 
     const addTo =  (e) => {
-        // console.log(e);
         if(!state2.orderDetails.includes(products[e])){
             dispatch({type: "ADD", payload: products[e], children:Number(products[e].price.split("$")[1])});
         } else {
             products[e].time = products[e].time +1;
             dispatch({type: "ADDTOTOTAL", children:Number(products[e].price.split("$")[1])})
         }
-
     };
-    // console.log(state2);
 
     return (
         <>

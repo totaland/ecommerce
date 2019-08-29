@@ -45,7 +45,7 @@ const Button = styled.button`
   -webkit-transition: all 150ms ease;
   transition: all 150ms ease;
   margin-top: 10px;
-  width: 100%;
+  width: 30%;
   &:hover {
     color: #fff;
     cursor: pointer;
@@ -53,6 +53,7 @@ const Button = styled.button`
     transform: translateY(-1px);
     box-shadow: 0 7px 14px rgba(50, 50, 93, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08);
   }
+  margin-right: 1em;
 `;
 
 const Div = styled.div`
@@ -88,8 +89,6 @@ function Payment({stripe: {createToken, customers}}) {
     // creating user, basket, item in DynamoDB, sending token, amount to backend
     const submit = async ev => {
         ev.preventDefault();
-        // get description of purchases
-
         // creating the token
         let {token} = await createToken({name: "Name"});
         // sending the data to backend
@@ -132,6 +131,10 @@ function Payment({stripe: {createToken, customers}}) {
 
     };
 
+    const handleBack = () => {
+        dispatch({type: "BACK"});
+    }
+
     if(state2.complete) return <h1>Purchase Complete</h1>;
     return (
         <Div>
@@ -149,7 +152,10 @@ function Payment({stripe: {createToken, customers}}) {
                     CVC
                     <CardCVCElement/>
                 </Label>
-                <Button onClick={submit}>Submit Payment</Button>
+                <div>
+                    <Button onClick={handleBack}>Back</Button>
+                    <Button onClick={submit}>Submit Payment</Button>
+                </div>
             </Form>
         </Div>
     );

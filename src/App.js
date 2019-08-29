@@ -65,6 +65,23 @@ function reducer(state, action) {
         case "CHECKSTATE":
             return {
                 ...state
+            };
+        case "SETSTEP":
+            return {
+                ...state,
+                step: state.step + 1
+            };
+        case "BACK":
+            return {
+                ...state,
+                step: state.step -1
+            };
+        case "SETNAME":
+            return {
+                ...state,
+                firstName: action.firstName,
+                lastName: action.lastName,
+                address: action.address
             }
         default:
             return state;
@@ -87,7 +104,11 @@ function App() {
         phone: "",
         tokenId: "",
         basketId: "",
-        description: ""
+        description: "",
+        step: 0,
+        firstName: "",
+        lastName: "",
+        address: "",
     };
 
     const [state2, dispatch] = useReducer(reducer, secondInit);
@@ -189,6 +210,7 @@ function App() {
                 console.log(res);
             })
         }
+
     };
     // sign user out of the application
     const signOut = async e => {
