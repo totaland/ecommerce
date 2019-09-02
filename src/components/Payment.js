@@ -1,4 +1,7 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import Modal from 'react-modal';
+
+
 import styled from "styled-components";
 import {
     CardElement,
@@ -10,6 +13,9 @@ import {
     StripeProvider
 } from "react-stripe-elements";
 import {AppContext} from "../context/AppContext";
+
+Modal.setAppElement('#root');
+Modal.defaultStyles.overlay.backgroundColor = 'cornsilk';
 
 const Label = styled.label`
   color: #6b7c93;
@@ -36,20 +42,20 @@ const Button = styled.button`
   box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
   color: #fff;
   border-radius: 4px;
-  font-size: 15px;
+  font-size: 1em;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.025em;
-  background-color: #6772e5;
+  background-color: #2d6790;
   text-decoration: none;
   -webkit-transition: all 150ms ease;
   transition: all 150ms ease;
   margin-top: 10px;
-  width: 30%;
+  //width: 30%;
   &:hover {
     color: #fff;
     cursor: pointer;
-    background-color: #7795f8;
+    background-color: #3E6CDB;
     transform: translateY(-1px);
     box-shadow: 0 7px 14px rgba(50, 50, 93, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08);
   }
@@ -66,6 +72,8 @@ let id;
 function Payment({stripe: {createToken, customers}}) {
 
     const [signOut, state2, dispatch, createUser, createBasket, createItem] = useContext(AppContext);
+
+    const [openModal, setOpenModal] = useState(false);
 
     useEffect(()=> {
         function setBasketID() {
@@ -129,13 +137,38 @@ function Payment({stripe: {createToken, customers}}) {
             console.log(e);
         }
 
+        setOpenModal(true);
+
     };
 
     const handleBack = () => {
         dispatch({type: "BACK"});
-    }
+    };
 
-    if(state2.complete) return <h1>Purchase Complete</h1>;
+    const completePurchase = () => {
+
+    };
+
+    const handleOpenModal = () => {
+        setOpenModal(true);
+    };
+    const handleCloseModal = () => {
+        setOpenModal(false);
+    };
+
+    if(state2.complete) return (
+      <div>
+          <Modal
+            isOpen={openModal}
+            contentLabel="Modal #1 Global Style Override Example"
+            onRequestClose={handleCloseModal}
+          >
+              <p>Modal text!</p>
+              <button onClick={handleCloseModal}>Close Modal</button>
+          </Modal>
+      </div>
+
+    );
     return (
         <Div>
             <p>Would you like to complete the purchase?</p>

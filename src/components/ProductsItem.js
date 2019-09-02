@@ -88,7 +88,7 @@ const BottomCard = styled.div`
 
 const Button = styled.button`
   border-radius: 8px;
-  background-color: #4dd0e1;
+  background-color: #1a4c6f;
   text-transform: uppercase;
   font-size: 1em;
   color: white;

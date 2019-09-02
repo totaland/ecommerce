@@ -82,7 +82,7 @@ function reducer(state, action) {
                 firstName: action.firstName,
                 lastName: action.lastName,
                 address: action.address
-            }
+            };
         default:
             return state;
     }
@@ -217,6 +217,7 @@ function App() {
         await Auth.signOut();
         dispatch({type: "LOGOUT"});
     };
+
 
     return (
         <StripeProvider apiKey={process.env.REACT_APP_STRIPE_PUBLISHABLE}>

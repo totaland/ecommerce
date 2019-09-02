@@ -32,14 +32,6 @@ export const FieldStyled = styled(Field)`
 `;
 
 export const Button = styled.button`
-  //background-color: #4dd0e1;
-  //border: none;
-  //padding: 1em 2em;
-  //border-radius: 3px;
-  //color: white;
-  //margin-bottom: 2em;
-  //font-size: 1rem;
-  //margin-top: 1em;
   margin-right: 1em;
   white-space: nowrap;
   border: 0;
@@ -51,22 +43,25 @@ export const Button = styled.button`
   box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
   color: #fff;
   border-radius: 4px;
-  font-size: 15px;
+  font-size: 1em;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.025em;
-  background-color: #6772e5;
+  background-color: #2d6790;
   text-decoration: none;
   -webkit-transition: all 150ms ease;
   transition: all 150ms ease;
   margin-top: 10px;
-  width: 30%;
+  //width: 30%;
   &:hover {
     color: #fff;
     cursor: pointer;
-    background-color: #7795f8;
+    background-color: rgba(62,108,219,1);
     transform: translateY(-1px);
     box-shadow: 0 7px 14px rgba(50, 50, 93, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08);
+  }
+  &:active {
+    transform: translateY(2px);
   }
   
 `;

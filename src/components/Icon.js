@@ -39,7 +39,7 @@ const ICON = styled(ShoppingBasket)`
 const Span = styled.span`
     position: absolute;
     top: 4%;
-    background-color: #6772e5;
+    background-color: #5b60ba;
     color: white;
     border-radius: 50%;
     width: 20px;

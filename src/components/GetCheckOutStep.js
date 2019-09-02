@@ -17,11 +17,11 @@ function GetCheckOutStep(props) {
   const step = state2.step;
   switch (step) {
     case 0:
-      return <CustomerDetails/>;
+      return <CustomerDetails />;
     case 1:
-      return <BasketReview/>;
+      return <BasketReview />;
     case 2:
-      return <Payment/>;
+      return <Payment />;
     default:
       throw new Error("Unknown step");
   }

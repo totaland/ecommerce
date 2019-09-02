@@ -12,8 +12,11 @@ import emotionalTies from "../images/EmotionalTies.JPG";
 import Avatar from "./Avatar";
 
 const Div = styled.div`
-   border: 1px solid lightgrey;
-   padding: 2em;
+    border: .5px solid lightgrey;
+    padding: 2em;
+    -webkit-box-shadow: 0px  5px 5px -5px rgba(0,0,0,0.25);
+    -moz-box-shadow: 0px 5px 5px -5px rgba(0,0,0,0.25);
+    box-shadow: 0px  5px 5px -5px rgba(0,0,0,0.25);
 `;
 const H2 = styled.h2`
   margin: 0;

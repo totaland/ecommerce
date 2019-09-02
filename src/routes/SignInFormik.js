@@ -1,35 +1,32 @@
-import React, {useContext, useEffect, useState} from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
-import {ErrorMessage, Field, Form, Formik} from "formik";
-import {AppContext} from "../context/AppContext";
-import {Auth, Hub} from "aws-amplify";
+import { ErrorMessage, Field, Form, Formik } from "formik";
+import { AppContext } from "../context/AppContext";
+import { Auth, Hub } from "aws-amplify";
+import landingpage from "../images/landingpage.jpg";
+import { NavLink } from "react-router-dom";
 
-const Div = styled.div`
+export const Container = styled.div`
+  display: flex;
+  width: 100%;
+  height: 100vh;
+`;
+export const Div = styled.div`
   padding: 3em;
   display: flex;
   justify-content: center;
-  width: 100%;
-  height: 100%;
-  vertical-align: middle;
+  width: 50%;
+  max-height: 100%;
   align-items: center;
 `;
 
 export const FormStyled = styled(Form)`
   display: flex;
   flex-direction: column;
-  max-width: 350px;
-  width: 50%;
-  min-width: 300px;
+  width: 100%;
   align-items: center;
-  max-height: 450px;
-  min-height: 350px;
-  height: 50%;
-  border: solid 1px rgb(0, 0, 0, 0.2);
   justify-content: space-between;
-  border-radius: 3px;
-  -webkit-box-shadow: 0px 2px 5px 0px rgba(153, 153, 153, 1);
-  -moz-box-shadow: 0px 2px 5px 0px rgba(153, 153, 153, 1);
-  box-shadow: 0px 2px 5px 0px rgba(153, 153, 153, 1);
+  max-width: 60%;
 `;
 
 export const FieldStyled = styled(Field)`
@@ -48,86 +45,136 @@ export const FieldStyled = styled(Field)`
   font-family: "Roboto", "Helvetica", "Arial", sans-serif;
 `;
 
-const Button = styled.button`
+export const Button = styled.button`
   width: 80%;
-  background-color: #4dd0e1;
+  background-color: #00538c;
   border: none;
   padding: 1em 2em;
   border-radius: 3px;
   color: white;
   margin-bottom: 2em;
   font-size: 1rem;
+  margin-top: 2em;
 `;
-const DivH1 = styled.div`
-  background-color: #4dd0e1;
-  width: 100%;
-  height: 100px;
-  align-items: center;
-  justify-content: center;
-  display: flex;
-  color: white;
+export const DivH1 = styled.div`
+  font-size: 1.5em;
+  line-height: 1.4;
+  font-weight: 700;
+  font-style: normal;
+  color: #00538c;
+  width: 80%;
+  text-align: center;
+  margin-bottom: 1.5em;
+`;
+export const H2 = styled(DivH1)`
+  font-size: 2em;
 `;
 
 export const Error = styled.div`
   color: #ee6e73;
 `;
 
+export const Label = styled.div`
+  font-size: 1.1em;
+  line-height: 1.4;
+  font-weight: 600;
+  font-style: normal;
+  color: #065484;
+  width: 80%;
+`;
+export const DivImage = styled.div`
+  width: 50%;
+  max-height: 100%;
+  display: flex;
+  align-items: center;
+  padding: 3em;
+  flex-direction: column;
+`;
+export const Img = styled.img`
+  width: 100%;
+`;
+export const P = styled.p`
+  color: #065484;
+  & a {
+    color: #fd7c77;
+    text-decoration: none;
+  }
+`;
+export const Hr = styled.hr`
+  width: 80%;
+  color: #065484;
+`;
+
 export default function SignInFormik(props) {
     const [signOut, state2, dispatch, createUser] = useContext(AppContext);
 
     return (
-        <Div>
-            <Formik
-                initialValues={{username: "", password: ""}}
-                validate={values => {
-                    let errors = {};
-                    if (!values.username) {
-                        errors.username = "Username is required";
-                    }
-                    if (!values.password) {
-                        errors.password = "Password is required";
-                    }
-                    return errors;
-                }}
-                onSubmit={(values, {setSubmitting}) => {
-                    setTimeout(() => {
-                        Auth.signIn({
-                            username: values.username,
-                            password: values.password
-                        })
+        <Container>
+            <Div>
+                <Formik
+                    initialValues={{ username: "", password: "" }}
+                    validate={values => {
+                        let errors = {};
+                        if (!values.username) {
+                            errors.username = "Username is required";
+                        }
+                        if (!values.password) {
+                            errors.password = "Password is required";
+                        }
+                        return errors;
+                    }}
+                    onSubmit={(values, { setSubmitting }) => {
+                        setTimeout(() => {
+                            Auth.signIn({
+                                username: values.username,
+                                password: values.password
+                            })
                             .then(() => {
                                 console.log("signed in");
                                 // userHasAuthenticated(true);
-                                dispatch({type: "LOGIN"});
+                                dispatch({ type: "LOGIN" });
                             })
                             .catch(err => {
                                 console.log(err);
                                 alert(err.message);
                             });
-                        setSubmitting(false);
-                    }, 400);
-                }}
-
-            >
-                {({isSubmitting}) => (
-                    <FormStyled>
-                        <DivH1>
-                            <h1>Login</h1>
-                        </DivH1>
-                        <FieldStyled type="text" name="username" placeholder={"Username"}/>
-                        <ErrorMessage name="username" component={Error}/>
-                        <FieldStyled
-                            type="password"
-                            name="password"
-                            placeholder={"Password"}
-                        />
-                        <ErrorMessage name="password" component={Error}/>
-                        <Button type="submit" disable={isSubmitting}>
-                            NEXT
-                        </Button>
-                    </FormStyled>
-                )}
-            </Formik>
-        </Div>
+                            setSubmitting(false);
+                        }, 400);
+                    }}
+                >
+                    {({ isSubmitting }) => (
+                        <FormStyled>
+                            <H2>UnderstandU</H2>
+                            <DivH1>Welcome Back</DivH1>
+                            <Label htmlFor="username">Username</Label>
+                            <FieldStyled
+                                type="text"
+                                name="username"
+                                placeholder={"Username"}
+                            />
+                            <ErrorMessage name="username" component={Error}/>
+                            <Label htmlFor="password">Password</Label>
+                            <FieldStyled
+                                type="password"
+                                name="password"
+                                placeholder={"Password"}
+                            />
+                            <ErrorMessage name="password" component={Error}/>
+                            <Button type="submit" disable={isSubmitting}>
+                                NEXT
+                            </Button>
+                            <Hr/>
+                            <P>
+                                Don't have an account?{" "}
+                                <NavLink to={"/register"}>Sign Up</NavLink>
+                            </P>
+                        </FormStyled>
+                    )}
+                </Formik>
+            </Div>
+            <DivImage>
+                <Img src={landingpage} alt="landingpage"/>
+            </DivImage>
+        </Container>
     );
 }
