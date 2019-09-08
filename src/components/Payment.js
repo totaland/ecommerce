@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import Modal from 'react-modal';
-
+import Modal from "react-modal";
 
 import styled from "styled-components";
 import {
@@ -12,10 +11,10 @@ import {
     injectStripe,
     StripeProvider
 } from "react-stripe-elements";
-import {AppContext} from "../context/AppContext";
+import { AppContext } from "../context/AppContext";
 
-Modal.setAppElement('#root');
-Modal.defaultStyles.overlay.backgroundColor = 'cornsilk';
+Modal.setAppElement("#root");
+Modal.defaultStyles.overlay.backgroundColor = "cornsilk";
 
 const Label = styled.label`
   color: #6b7c93;
@@ -55,7 +54,7 @@ const Button = styled.button`
   &:hover {
     color: #fff;
     cursor: pointer;
-    background-color: #3E6CDB;
+    background-color: #3e6cdb;
     transform: translateY(-1px);
     box-shadow: 0 7px 14px rgba(50, 50, 93, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08);
   }
@@ -69,27 +68,46 @@ const Div = styled.div`
   flex-direction: column;
 `;
 let id;
-function Payment({stripe: {createToken, customers}}) {
 
-    const [signOut, state2, dispatch, createUser, createBasket, createItem] = useContext(AppContext);
+function Payment({ stripe: { createToken, customers } }) {
+    const [
+        signOut,
+        state2,
+        dispatch,
+        createUser,
+        createBasket,
+        createItem
+    ] = useContext(AppContext);
 
     const [openModal, setOpenModal] = useState(false);
 
-    useEffect(()=> {
+    useEffect(() => {
         function setBasketID() {
-            dispatch({type: "CHECKSTATE"});
-            id=state2.basketId;
+            dispatch({ type: "CHECKSTATE" });
+            id = state2.basketId;
         }
+
         setBasketID();
-    },[state2.basketId]);
+    }, [state2.basketId]);
 
     console.log(state2.orderDetails);
     let des = "For the purchases of: ";
     for (let i = 0; i < state2.orderDetails.length; i++) {
-        if(i === state2.orderDetails.length-1) {
-            des = des + "and " + state2.orderDetails[i].time + "x" + state2.orderDetails[i].name + ".";
+        if (i === state2.orderDetails.length - 1) {
+            des =
+                des +
+                "and " +
+                state2.orderDetails[i].time +
+                "x" +
+                state2.orderDetails[i].name +
+                ".";
         } else {
-            des = des + state2.orderDetails[i].time + "x" + state2.orderDetails[i].name + ", ";
+            des =
+                des +
+                state2.orderDetails[i].time +
+                "x" +
+                state2.orderDetails[i].name +
+                ", ";
         }
     }
     console.log(state2);
@@ -98,30 +116,33 @@ function Payment({stripe: {createToken, customers}}) {
     const submit = async ev => {
         ev.preventDefault();
         // creating the token
-        let {token} = await createToken({name: "Name"});
+        let { token } = await createToken({ name: "Name" });
         // sending the data to backend
-        let response = await fetch("https://wm9vjg32g3.execute-api.ap-southeast-2.amazonaws.com/dev/charge", {
-            method: "POST",
-            body: JSON.stringify({
-                token: token.id,
-                charge: {
-                    amount: Number(state2.total*100).toFixed(0),
-                    currency: "aud",
-                    description: des
-                },
-                customer: {
-                    name: state2.username,
-                    email: state2.email,
-                    phone: state2.phone
-                },
-            }),
-        });
+        let response = await fetch(
+            "https://wm9vjg32g3.execute-api.ap-southeast-2.amazonaws.com/dev/charge",
+            {
+                method: "POST",
+                body: JSON.stringify({
+                    token: token.id,
+                    charge: {
+                        amount: Number(state2.total * 100).toFixed(0),
+                        currency: "aud",
+                        description: des
+                    },
+                    customer: {
+                        name: state2.username,
+                        email: state2.email,
+                        phone: state2.phone
+                    }
+                })
+            }
+        );
 
-        if(response.ok){
-            dispatch({type: "COMPLETE"}); // what to do after setting it to complete?
+        if (response.ok) {
+            dispatch({ type: "COMPLETE" }); // what to do after setting it to complete?
             console.log("Purchase Complete");
-        //  after complete the pay then users will receive the report
-        //  will call the method that send the report to user email address here.
+            //  after complete the pay then users will receive the report
+            //  will call the method that send the report to user email address here.
         }
         // create users
         try {
@@ -130,23 +151,21 @@ function Payment({stripe: {createToken, customers}}) {
             console.log(e);
         }
 
-        try{
-            await dispatch({type: "SETTOKEN", tokenId: token.id});
+        try {
+            await dispatch({ type: "SETTOKEN", tokenId: token.id });
             await createBasket(token.id);
         } catch (e) {
             console.log(e);
         }
 
         setOpenModal(true);
-
     };
 
     const handleBack = () => {
-        dispatch({type: "BACK"});
+        dispatch({ type: "BACK" });
     };
 
     const completePurchase = () => {
-
     };
 
     const handleOpenModal = () => {
@@ -156,19 +175,19 @@ function Payment({stripe: {createToken, customers}}) {
         setOpenModal(false);
     };
 
-    if(state2.complete) return (
-      <div>
-          <Modal
-            isOpen={openModal}
-            contentLabel="Modal #1 Global Style Override Example"
-            onRequestClose={handleCloseModal}
-          >
-              <p>Modal text!</p>
-              <button onClick={handleCloseModal}>Close Modal</button>
-          </Modal>
-      </div>
-
-    );
+    if (state2.complete)
+        return (
+            <div>
+                <Modal
+                    isOpen={openModal}
+                    contentLabel="Modal #1 Global Style Override Example"
+                    onRequestClose={handleCloseModal}
+                >
+                    <p>Modal text!</p>
+                    <button onClick={handleCloseModal}>Close Modal</button>
+                </Modal>
+            </div>
+        );
     return (
         <Div>
             <p>Would you like to complete the purchase?</p>

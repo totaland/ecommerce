@@ -27,6 +27,7 @@ export const FormStyled = styled(Form)`
   align-items: center;
   justify-content: space-between;
   max-width: 60%;
+  min-width: 350px;
 `;
 
 export const FieldStyled = styled(Field)`
@@ -86,6 +87,7 @@ export const DivImage = styled.div`
   width: 50%;
   max-height: 100%;
   display: flex;
+  justify-content: center;
   align-items: center;
   padding: 3em;
   flex-direction: column;
