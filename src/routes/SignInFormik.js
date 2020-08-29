@@ -127,6 +127,7 @@ export default function SignInFormik(props) {
                     }}
                     onSubmit={(values, { setSubmitting }) => {
                         setTimeout(() => {
+                            dispatch({ type: "LOGIN" });
                             Auth.signIn({
                                 username: values.username,
                                 password: values.password
