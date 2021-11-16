@@ -7,7 +7,7 @@
     "@material-ui/icons": "^4.2.1",
     "aws-amplify": "^1.1.32",
     "aws-amplify-react": "^2.3.11",
-    "aws-sdk": "^2.434.0",
+    "aws-sdk": "^2.814.0",
     "axios": "^0.19.0",
     "dotenv": "^8.0.0",
     "formik": "^1.5.8",
